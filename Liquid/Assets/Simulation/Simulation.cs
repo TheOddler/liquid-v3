@@ -116,6 +116,7 @@ public class Simulation : MonoBehaviour
 		_blurSandMaterial = new Material(_blurSandShader);
 
 		// Create textures
+		_gridPixelCount = Mathf.ClosestPowerOfTwo(_gridPixelCount);
 		var format = RenderTextureFormat.ARGBFloat;
 		var readWrite = RenderTextureReadWrite.Linear;
 		Assert.IsTrue(SystemInfo.SupportsRenderTextureFormat(format), "Rendertexture format not supported: " + format);
