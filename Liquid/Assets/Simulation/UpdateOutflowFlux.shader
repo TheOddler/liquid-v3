@@ -59,7 +59,7 @@
 				float4 fn = max(0, flux + _DT * _A * _G * dh / _L); // fn = flux next; add fluxdamp?
 
 				// Formula 4
-				float K = max(0, min(1, (heights.r * _L * _L) / ((fn.r + fn.g + fn.b + fn.a) * _DT)));
+				float K = clamp((heights.r * _L * _L) / ((fn.r + fn.g + fn.b + fn.a) * _DT), 0, 1);
 
 				// Formula 5
 				return K * fn;
