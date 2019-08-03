@@ -640,9 +640,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'Left mouse to add water (soon)
+  m_text: '<alpha=#11>Left mouse to add water (soon)
 
-    Right mouse to rotate camera
+    <alpha=#FF>Right mouse to rotate camera
 
     WASD to move
 
@@ -2477,7 +2477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be76e5f14cfee674cb30b491fb72b09b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boost: 3.5
+  boost: 1.5
   positionLerpTime: 0.2
   mouseSensitivityCurve:
     serializedVersion: 2
