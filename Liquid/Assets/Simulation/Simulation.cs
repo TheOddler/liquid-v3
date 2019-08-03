@@ -104,7 +104,6 @@ public class Simulation : MonoBehaviour
 	void Start ()
 	{
 		// Some assurances
-		Assert.raiseExceptions = true;
 		Assert.IsFalse(_initialHeights == null, "Missing initial heights material."); //IsNotNull doesn't work for some reason
 
 		// Create materials
