@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+    <head>
+        <meta charset="utf-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>%UNITY_WEB_NAME% | Unity WebGL Player</title>
+        <script src="%UNITY_WEBGL_LOADER_URL%"></script>
+
+        <script>
+            var unityInstance = UnityLoader.instantiate("unityContainer", "%UNITY_WEBGL_BUILD_URL%");
+        </script>
+
+        <style>
+            html {
+                box-sizing: border-box;
+            }
+            *, *:before, *:after {
+                box-sizing: inherit;
+            }
+            body {
+                margin: 0;
+            }
+            #unityContainer {
+                width: 100vw;
+                height: 100vh;
+            }
+            canvas {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+            /* try to handle mobile dialog */
+            canvas + * {
+                z-index: 2;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="unityContainer"></div>
+    </body>
+
+</html>
