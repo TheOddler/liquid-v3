@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17905357, g: 0.21854408, b: 0.2733912, a: 1}
+  m_IndirectSpecularColor: {r: 0.17893599, g: 0.22405562, b: 0.3059009, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1113,7 +1113,7 @@ GameObject:
   - component: {fileID: 864838740}
   - component: {fileID: 864838739}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1164,13 +1164,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864838738}
-  m_LocalRotation: {x: 0.12485955, y: -0.28896222, z: 0.03804255, w: 0.9484006}
+  m_LocalRotation: {x: 0.39988604, y: 0.44350544, z: -0.23087431, w: 0.76817393}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 15.000001, y: -753.89, z: 0}
+  m_LocalEulerAnglesHint: {x: 55, y: 60, z: 0}
 --- !u!1 &1091581270
 GameObject:
   m_ObjectHideFlags: 0
