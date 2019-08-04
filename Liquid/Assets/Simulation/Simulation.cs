@@ -25,7 +25,7 @@ public class Simulation : MonoBehaviour
     float _gravityConstant = 9.81f;
 
     [SerializeField]
-    [Range(0f, 1f)]
+    [Range(0.9f, 1f)]
     float _damping = 0.99f;
 
     [Header("Sand Settings")]
@@ -155,7 +155,10 @@ public class Simulation : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            AddWaterSandRockSediment(new Vector2(0.5f, 0.5f), 5f, new Vector4(1f * Time.deltaTime, 0, 0, 0));
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 zeroPos = ray.origin + ray.direction * (ray.origin.y - 0.5f) / -ray.direction.y;
+            Debug.Log(ray.origin + " -> " + ray.direction + " = " + zeroPos);
+            AddWaterSandRockSediment(new Vector2(5f + zeroPos.x, 5f - zeroPos.z) / 10f, 2f, new Vector4(1f * Time.deltaTime, 0, 0, 0));
         }
     }
 

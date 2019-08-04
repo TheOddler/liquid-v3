@@ -614,7 +614,7 @@ GameObject:
   - component: {fileID: 487558691}
   - component: {fileID: 487558690}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -640,9 +640,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: '<alpha=#11>Left mouse to add water (soon)
+  m_text: 'Left mouse to add water
 
-    <alpha=#FF>Right mouse to rotate camera
+    Right mouse to rotate camera
 
     WASD to move
 
@@ -715,10 +715,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 487558690}
-    characterCount: 73
+    characterCount: 66
     spriteCount: 0
-    spaceCount: 14
-    wordCount: 14
+    spaceCount: 13
+    wordCount: 13
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -1295,11 +1295,11 @@ MonoBehaviour:
   _pipeCrossSectionArea: 0.5
   _gravityConstant: 9.81
   _damping: 0.99
-  _sandBlurPerSecond: 0.1
+  _sandBlurPerSecond: 0
   _sandBlurAtStartSigma: 5
   _sedimentCapacityConstant: 1
-  _dissolvingConstant: 0.01
-  _depositionConstant: 0.005
+  _dissolvingConstant: 0.04
+  _depositionConstant: 0.02
   _erosionMinimumAngleThresshold: 0.02
   _initialHeights: {fileID: 2100000, guid: 07daa73697f893f44941010dcf0cbe00, type: 2}
   _maxSimStepsPerFrame: 5

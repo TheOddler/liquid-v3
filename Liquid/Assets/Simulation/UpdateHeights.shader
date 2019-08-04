@@ -60,8 +60,8 @@
 				// Formula 7
 				return float4(
 					heights.r + _Damping * deltaV / (_L * _L), 
-					heights.g, 
-					//(heights.g + (hR.g + hL.g + hB.g + hT.g) * _DT * _SandBlurPerSecond) / (1 + 4 * _DT * _SandBlurPerSecond),
+					//heights.g, 
+					(heights.g + (hR.g + hL.g + hB.g + hT.g) * _DT * _SandBlurPerSecond) / (1 + 4 * _DT * _SandBlurPerSecond),
 					heights.b, 
 					heights.a);
 			}
