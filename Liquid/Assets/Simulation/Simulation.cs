@@ -12,6 +12,7 @@ public class Simulation : MonoBehaviour
     public int GridPixelCount { get { return _gridPixelCount; } }
 
     [SerializeField]
+    [Tooltip("20fps = 0.05, 30fps = 0.0333, 60fps = 0.0166")]
     float _updateInterval = 0.01f; // also called deltaTime in the paper, denoted "_DT" in shaders
     public float UpdateInterval { get { return _updateInterval; } }
 
@@ -22,6 +23,10 @@ public class Simulation : MonoBehaviour
     float _pipeCrossSectionArea = 0.1f;
     [SerializeField]
     float _gravityConstant = 9.81f;
+
+    [SerializeField]
+    [Range(0f, 1f)]
+    float _damping = 0.99f;
 
     [Header("Sand Settings")]
     [SerializeField]
@@ -65,6 +70,8 @@ public class Simulation : MonoBehaviour
     Shader _updateSedimentTransportationShader;
     [SerializeField]
     Shader _blurSandShader;
+    [SerializeField]
+    Shader _addSourceShader;
 
     //
     // Materials
@@ -75,6 +82,7 @@ public class Simulation : MonoBehaviour
     Material _updateErosionDepositionMaterial;
     Material _updateSedimentTransportationMaterial;
     Material _blurSandMaterial;
+    Material _addSourceMaterial;
 
     //
     // Textures
@@ -114,6 +122,8 @@ public class Simulation : MonoBehaviour
         _updateSedimentTransportationMaterial = new Material(_updateSedimentTransportationShader);
         _blurSandMaterial = new Material(_blurSandShader);
 
+        _addSourceMaterial = new Material(_addSourceShader);
+
         // Create textures
         _gridPixelCount = Mathf.ClosestPowerOfTwo(_gridPixelCount);
         var format = RenderTextureFormat.ARGBFloat;
@@ -142,6 +152,11 @@ public class Simulation : MonoBehaviour
             if (OnSimStep != null) OnSimStep();
         }
         if (OnAfterSimFrame != null) OnAfterSimFrame();
+
+        if (Input.GetMouseButton(0))
+        {
+            AddWaterSandRockSediment(new Vector2(0.5f, 0.5f), 5f, new Vector4(1f * Time.deltaTime, 0, 0, 0));
+        }
     }
 
     void UpdateSimulation()
@@ -177,6 +192,7 @@ public class Simulation : MonoBehaviour
         _updateHeightsMaterial.SetFloat("_DT", _updateInterval);
         _updateHeightsMaterial.SetFloat("_L", _gridPixelSize);
         _updateHeightsMaterial.SetFloat("_SandBlurPerSecond", _sandBlurPerSecond);
+        _updateHeightsMaterial.SetFloat("_Damping", _damping);
 
         // Do the step
         Graphics.Blit(_waterSandRockSediment.Texture, _waterSandRockSediment.Buffer, _updateHeightsMaterial);
@@ -243,5 +259,29 @@ public class Simulation : MonoBehaviour
 
         // Finalize
         _waterSandRockSediment.Swap();
+    }
+
+    public void AddWaterSandRockSediment(Vector2 mid, float radius, Vector4 amount)
+    {
+        var tmpActiveRT = RenderTexture.active;
+        RenderTexture.active = CurrentWaterSandRockSediment;
+
+        var brushSize = new Vector2(radius * 2, radius * 2);
+        mid *= GridPixelCount;
+        mid -= brushSize / 2;
+        Rect screenRect = new Rect(mid, brushSize);
+
+        Texture tex = Texture2D.whiteTexture;
+
+        amount /= GridPixelSize * GridPixelSize;
+        amount = Vector4.Scale(amount, new Vector4(1f / 8f, 1f / 8f, 1f / 8f, 1f / 8f));
+        _addSourceMaterial.SetVector("_Scale", amount);
+
+        GL.PushMatrix();
+        GL.LoadPixelMatrix(0, GridPixelCount, GridPixelCount, 0);
+        Graphics.DrawTexture(screenRect, tex, _addSourceMaterial);
+        GL.PopMatrix();
+
+        RenderTexture.active = tmpActiveRT;
     }
 }
