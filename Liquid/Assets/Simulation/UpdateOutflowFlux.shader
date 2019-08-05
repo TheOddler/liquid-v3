@@ -9,6 +9,8 @@
 		_L("Pipe Length", Float) = 0.2
 		_A("Pipe Cross Section Area", Float) = 1.0
 		_G("Gravity Constant", Float) = 9.81
+
+		_Damping("Damping level per tick, 1 means no damping, 0 everything", Float) = 0.99
 	}
 	SubShader
 	{
@@ -32,6 +34,8 @@
 			float _A;
 			float _G;
 
+			float _Damping;
+
 			float4 frag(v2f_img i) : SV_Target
 			{
 				float4 flux = tex2D(_MainTex, i.uv);
@@ -45,18 +49,18 @@
 				//float otherHeight = heights.g + heights.b; //only sand and rock
 				//float totalHeight = heights.r + heights.g + heights.b; //with water
 				//float4 totalHeight4 = float4(totalHeight, totalHeight, totalHeight, totalHeight);
-				float4 totalHeight4 = heights.r + heights.g + heights.b;
+				float4 totalHeight4 = heights.r + heights.g + heights.b + heights.a;
 				float4 totalH_RLBT = float4(
-					hR.r + hR.g + hR.b,
-					hL.r + hL.g + hL.b,
-					hB.r + hB.g + hB.b,
-					hT.r + hT.g + hT.b);
+					hR.r + hR.g + hR.b + hR.a,
+					hL.r + hL.g + hL.b + hL.a,
+					hB.r + hB.g + hB.b + hB.a,
+					hT.r + hT.g + hT.b + hT.a);
 
 				// Formula 3
 				float4 dh = totalHeight4 - totalH_RLBT;
 
 				// Formula 2
-				float4 fn = max(0, flux + _DT * _A * _G * dh / _L); // fn = flux next; add fluxdamp?
+				float4 fn = max(0, flux + _DT * _A * _G * dh / _L) * _Damping; // fn = flux next; add fluxdamp?
 
 				// Formula 4
 				float K = clamp((heights.r * _L * _L) / ((fn.r + fn.g + fn.b + fn.a) * _DT), 0, 1);

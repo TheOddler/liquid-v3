@@ -9,8 +9,6 @@
 		_L("Pipe Length", Float) = 0.2
 
 		_SandBlurPerSecond("Sand-blur per second", Float) = 10.0
-
-		_Damping("Damping level per tick, 1 means no damping, 0 everything", Float) = 0.99
 	}
 	SubShader
 	{
@@ -35,8 +33,6 @@
 
 			float _SandBlurPerSecond;
 
-			float _Damping;
-
 			float4 frag (v2f_img i) : SV_Target
 			{
 				float4 heights = tex2D(_MainTex, i.uv);
@@ -59,9 +55,9 @@
 				
 				// Formula 7
 				return float4(
-					heights.r + _Damping * deltaV / (_L * _L), 
-					//heights.g, 
-					(heights.g + (hR.g + hL.g + hB.g + hT.g) * _DT * _SandBlurPerSecond) / (1 + 4 * _DT * _SandBlurPerSecond),
+					heights.r + deltaV / (_L * _L), 
+					heights.g, 
+					//(heights.g + (hR.g + hL.g + hB.g + hT.g) * _DT * _SandBlurPerSecond) / (1 + 4 * _DT * _SandBlurPerSecond),
 					heights.b, 
 					heights.a);
 			}

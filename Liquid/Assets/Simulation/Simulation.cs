@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
 
+// http://evasion.imag.fr/Publications/2007/MDH07/
+
 public class Simulation : MonoBehaviour
 {
     //
@@ -179,6 +181,7 @@ public class Simulation : MonoBehaviour
         _updateOutflowFluxMaterial.SetFloat("_L", _gridPixelSize);
         _updateOutflowFluxMaterial.SetFloat("_A", _pipeCrossSectionArea);
         _updateOutflowFluxMaterial.SetFloat("_G", _gravityConstant);
+        _updateOutflowFluxMaterial.SetFloat("_Damping", _damping);
 
         // Do the step
         Graphics.Blit(_outflowFluxRLBT.Texture, _outflowFluxRLBT.Buffer, _updateOutflowFluxMaterial);
@@ -194,7 +197,6 @@ public class Simulation : MonoBehaviour
         _updateHeightsMaterial.SetFloat("_DT", _updateInterval);
         _updateHeightsMaterial.SetFloat("_L", _gridPixelSize);
         _updateHeightsMaterial.SetFloat("_SandBlurPerSecond", _sandBlurPerSecond);
-        _updateHeightsMaterial.SetFloat("_Damping", _damping);
 
         // Do the step
         Graphics.Blit(_waterSandRockSediment.Texture, _waterSandRockSediment.Buffer, _updateHeightsMaterial);
