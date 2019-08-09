@@ -154,13 +154,6 @@ public class Simulation : MonoBehaviour
             if (OnSimStep != null) OnSimStep();
         }
         if (OnAfterSimFrame != null) OnAfterSimFrame();
-
-        if (Input.GetMouseButton(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Vector3 zeroPos = ray.origin + ray.direction * (ray.origin.y - 0.5f) / -ray.direction.y;
-            AddWaterSandRockSediment(new Vector2(5f + zeroPos.x, 5f - zeroPos.z) / 10f, 2f, new Vector4(1f * Time.deltaTime, 0, 0, 0));
-        }
     }
 
     void UpdateSimulation()
