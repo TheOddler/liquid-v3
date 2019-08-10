@@ -60,6 +60,7 @@
 
 				if (C > heights.a) { //more capacity than sediment = erode
 					float erode = min(C - heights.a, _Ks * (C - heights.a));
+					erode = min(heights.g, erode); // don't erode more than there is sand
 					heights.g -= erode;
 					heights.a += erode;
 				}
