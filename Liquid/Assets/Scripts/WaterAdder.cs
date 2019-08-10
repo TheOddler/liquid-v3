@@ -21,7 +21,12 @@ public class WaterAdder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(new Vector2(_input.Mouse.XPosition.ReadValue<float>(), _input.Mouse.YPosition.ReadValue<float>()));
+        Vector2 mousePos = new Vector2(_input.Mouse.XPosition.ReadValue<float>(), _input.Mouse.YPosition.ReadValue<float>());
+        if (Application.platform == RuntimePlatform.WebGLPlayer) // TEMP: Fix for inverted Y on WebGL
+        {
+            mousePos.y = Screen.height - mousePos.y;
+        }
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
         Vector3 castPosition = ray.origin + ray.direction * (ray.origin.y - transform.position.y) / -ray.direction.y;
         transform.position = castPosition;
 

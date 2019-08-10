@@ -46,6 +46,10 @@ public class SimpleCameraController : MonoBehaviour
         {
             float mouseX = _input.Mouse.XDelta.ReadValue<float>();
             float mouseY = _input.Mouse.YDelta.ReadValue<float>();
+            if (Application.platform == RuntimePlatform.WebGLPlayer) // TEMP: Fix for inverted Y on WebGL
+            {
+                mouseY = -mouseY;
+            }
             Vector3 rot = transform.rotation.eulerAngles;
             Quaternion rotLeftRight = Quaternion.AngleAxis(mouseX * _rotationSpeed, Vector3.up);
             Quaternion rotUpDown = Quaternion.AngleAxis(-mouseY * _rotationSpeed, Vector3.right);
