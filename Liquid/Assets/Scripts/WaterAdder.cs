@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WaterAdder : MonoBehaviour
 {
@@ -11,14 +9,23 @@ public class WaterAdder : MonoBehaviour
     [Tooltip("Size of the mesh of the simulation")]
     float _simulationSize = 10;
 
+    private InputMaster _input;
+
+    void Awake()
+    {
+        _input = new InputMaster();
+        _input.Player.Enable();
+        _input.Mouse.Enable();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(new Vector2(_input.Mouse.XPosition.ReadValue<float>(), _input.Mouse.YPosition.ReadValue<float>()));
         Vector3 castPosition = ray.origin + ray.direction * (ray.origin.y - transform.position.y) / -ray.direction.y;
         transform.position = castPosition;
 
-        if (Input.GetMouseButton(0))
+        if (_input.Player.AddWater.ReadValue<float>() > 0.5f)
         {
             Vector2 posInSim = new Vector2(
                 _simulationSize / 2f + (castPosition.x - _simulation.transform.position.x),
