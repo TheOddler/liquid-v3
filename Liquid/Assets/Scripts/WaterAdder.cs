@@ -3,11 +3,14 @@
 public class WaterAdder : MonoBehaviour
 {
     [SerializeField]
-    Simulation _simulation;
+    Simulation _simulation = null;
 
+    [Header("Settings")]
     [SerializeField]
-    [Tooltip("Size of the mesh of the simulation")]
-    float _simulationSize = 10;
+    float _radius = 2.0f;
+    [SerializeField]
+    [Tooltip("Amount per second")]
+    float _amount = 1.0f;
 
     private InputMaster _input;
 
@@ -32,11 +35,12 @@ public class WaterAdder : MonoBehaviour
 
         if (_input.Player.AddWater.ReadValue<float>() > 0.5f)
         {
+            float simSize = _simulation.transform.lossyScale.x; //assume it's equally scaled
             Vector2 posInSim = new Vector2(
-                _simulationSize / 2f + (castPosition.x - _simulation.transform.position.x),
-                _simulationSize / 2f - (castPosition.z - _simulation.transform.position.z)
-                ) / _simulationSize;
-            _simulation.AddWaterSandRockSediment(posInSim, 2f, new Vector4(1f * Time.deltaTime, 0, 0, 0));
+                simSize / 2f + (castPosition.x - _simulation.transform.position.x),
+                simSize / 2f - (castPosition.z - _simulation.transform.position.z)
+                ) / simSize;
+            _simulation.AddWaterSandRockSediment(posInSim, _radius, new Vector4(_amount * Time.deltaTime, 0, 0, 0));
         }
     }
 }
