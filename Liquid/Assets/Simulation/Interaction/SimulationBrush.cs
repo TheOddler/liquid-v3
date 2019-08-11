@@ -5,7 +5,7 @@ using System.Collections;
 public class SimulationBrush : ScriptableObject
 {
     [SerializeField]
-    Texture2D _texture;
+    Texture2D _texture = null;
     public Texture2D Texture { get { return _texture; } }
 
     Vector4 _inverseTotalMagnitude;

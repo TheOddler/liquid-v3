@@ -46,7 +46,7 @@ public class Simulation : MonoBehaviour
 
     [Header("Initializaton")]
     [SerializeField]
-    Material _initialHeights;
+    Material _initialHeights = null;
 
     [Header("Performace")]
     [SerializeField]
@@ -64,19 +64,19 @@ public class Simulation : MonoBehaviour
     // ---
     [Header("Simulation Shaders")]
     [SerializeField]
-    Shader _updateOutflowFluxShader;
+    Shader _updateOutflowFluxShader = null;
     [SerializeField]
-    Shader _updateHeightsShader;
+    Shader _updateHeightsShader = null;
     [SerializeField]
-    Shader _updateVelocityFieldShader;
+    Shader _updateVelocityFieldShader = null;
     [SerializeField]
-    Shader _updateErosionDepositionShader;
+    Shader _updateErosionDepositionShader = null;
     [SerializeField]
-    Shader _updateSedimentTransportationShader;
+    Shader _updateSedimentTransportationShader = null;
     [SerializeField]
-    Shader _blurSandShader;
+    Shader _blurSandShader = null;
     [SerializeField]
-    Shader _addSourceShader;
+    Shader _addSourceShader = null;
 
     //
     // Materials
