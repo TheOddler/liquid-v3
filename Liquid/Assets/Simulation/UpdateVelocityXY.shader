@@ -46,7 +46,7 @@
 				float dAv = max(0.000001f, (heights.r + previousHeights.r) * 0.5);
 				float4 dW = float4(
 					(fL.r - flux.g + flux.r - fR.g) * 0.5,
-					(fB.a - flux.b + flux.a - fT.b) * 0.5,
+					(fT.b - flux.a + flux.b - fB.a) * 0.5,
 					0, 0);
 				
 				return dW / dAv / _L;

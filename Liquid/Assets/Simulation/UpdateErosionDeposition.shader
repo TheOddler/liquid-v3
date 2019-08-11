@@ -55,7 +55,9 @@
 				// calculations for tilt with help from: http://math.stackexchange.com/questions/1044044/local-tilt-angle-based-on-height-field#1044080
 				float dhx = (hR.g + hR.b - hL.g - hL.b) / (2 * _L);
 				float dhy = (hB.g + hB.b - hT.g - hT.b) / (2 * _L);
-				float sinAlpha = max(_ErosionMinimumAngleThresshold, sqrt(1 - 1 / (1 + dhx * dhx + dhy * dhy)));
+				//float sinAlpha = max(_ErosionMinimumAngleThresshold, sqrt(1 - 1 / (1 + dhx * dhx + dhy * dhy)));
+				float sinAlpha = sqrt(dhx * dhx + dhy * dhy) / sqrt(1 + dhx * dhx + dhy * dhy);
+				sinAlpha = max(_ErosionMinimumAngleThresshold, sinAlpha);
 				float C = _Kc * sinAlpha * sqrt(velocity.r * velocity.r + velocity.g * velocity.g) * _L * _L * heights.r; //transport capacity
 
 				if (C > heights.a) { //more capacity than sediment = erode

@@ -75,12 +75,17 @@ Material:
         m_Texture: {fileID: 2800000, guid: 4f78af996b11d6044a6f240e4232a6d4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _VelocityXY:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _WaterSandRockSediment:
         m_Texture: {fileID: 2800000, guid: 4f78af996b11d6044a6f240e4232a6d4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_37077D65: 0.05
+    - Vector1_AAE9A17E: 50
     - Vector1_DC5CD80E: 5
     - Vector1_E4BE725C: 10.06
     - Vector1_FF7A4479: 0.1
