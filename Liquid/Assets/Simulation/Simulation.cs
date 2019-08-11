@@ -56,6 +56,8 @@ public class Simulation : MonoBehaviour
     [SerializeField]
     [Range(0.9f, 1f)]
     float _damping = 0.99f;
+    [SerializeField]
+    float _fluxDeltaLimit = 0.01f;
 
     //
     // Schaders
@@ -176,6 +178,7 @@ public class Simulation : MonoBehaviour
         _updateOutflowFluxMaterial.SetFloat("_A", _pipeCrossSectionArea);
         _updateOutflowFluxMaterial.SetFloat("_G", _gravityConstant);
         _updateOutflowFluxMaterial.SetFloat("_Damping", _damping);
+        _updateOutflowFluxMaterial.SetFloat("_FluxDeltaLimit", _fluxDeltaLimit);
 
         // Do the step
         Graphics.Blit(_outflowFluxRLBT.Texture, _outflowFluxRLBT.Buffer, _updateOutflowFluxMaterial);
