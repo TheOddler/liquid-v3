@@ -26,10 +26,6 @@ public class Simulation : MonoBehaviour
     [SerializeField]
     float _gravityConstant = 9.81f;
 
-    [SerializeField]
-    [Range(0.9f, 1f)]
-    float _damping = 0.99f;
-
     [Header("Sand Settings")]
     [SerializeField]
     float _sandBlurPerSecond = 10.0f;
@@ -55,6 +51,11 @@ public class Simulation : MonoBehaviour
     [Header("Performace")]
     [SerializeField]
     int _maxSimStepsPerFrame = 5;
+
+    [Header("Stabilization")]
+    [SerializeField]
+    [Range(0.9f, 1f)]
+    float _damping = 0.99f;
 
     //
     // Schaders
