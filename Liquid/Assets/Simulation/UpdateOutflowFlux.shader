@@ -64,8 +64,8 @@
 				// Formula 2
 				float4 fluxDelta = _DT * _A * _G * dh / _L;
 				//fluxDelta = clamp(fluxDelta, -_FluxDeltaLimit, _FluxDeltaLimit);
-				fluxDelta = _FluxDeltaLimit * fluxDelta / (1 + abs(fluxDelta)); // Smooth clamping function
-				//fluxDelta = _FluxDeltaLimit * tanh(fluxDelta / _FluxDeltaLimit); // Smooth clamping function
+				//fluxDelta = _FluxDeltaLimit * fluxDelta / (1 + abs(fluxDelta)); // Smooth clamping function
+				fluxDelta = _FluxDeltaLimit * tanh(fluxDelta / _FluxDeltaLimit); // Smooth clamping function
 				//fluxDelta = _FluxDeltaLimit * fluxDelta / sqrt(1 + fluxDelta * fluxDelta); // Smooth clamping function
 				float4 fn = max(0, flux + fluxDelta) * _Damping; // fn = flux next;
 
