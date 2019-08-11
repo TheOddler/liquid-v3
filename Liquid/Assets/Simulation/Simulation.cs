@@ -19,8 +19,8 @@ public class Simulation : MonoBehaviour
     public float UpdateInterval { get { return _updateInterval; } }
 
     [SerializeField]
-    float _gridPixelSize = 0.1f; // also called pipe-length (l) in the paper, denoted "_L" in shaders
-    public float GridPixelSize { get { return _gridPixelSize; } }
+    float _pipeLength = 0.1f;
+    public float PipeLength { get { return _pipeLength; } }
     [SerializeField]
     float _pipeCrossSectionArea = 0.1f;
     [SerializeField]
@@ -171,7 +171,7 @@ public class Simulation : MonoBehaviour
         // Set values
         _updateOutflowFluxMaterial.SetTexture("_WaterSandRockSedimentTex", _waterSandRockSediment.Texture);
         _updateOutflowFluxMaterial.SetFloat("_DT", _updateInterval);
-        _updateOutflowFluxMaterial.SetFloat("_L", _gridPixelSize);
+        _updateOutflowFluxMaterial.SetFloat("_L", _pipeLength);
         _updateOutflowFluxMaterial.SetFloat("_A", _pipeCrossSectionArea);
         _updateOutflowFluxMaterial.SetFloat("_G", _gravityConstant);
         _updateOutflowFluxMaterial.SetFloat("_Damping", _damping);
@@ -188,7 +188,7 @@ public class Simulation : MonoBehaviour
         // Set values
         _updateHeightsMaterial.SetTexture("_OutflowFluxRLBT", _outflowFluxRLBT.Texture);
         _updateHeightsMaterial.SetFloat("_DT", _updateInterval);
-        _updateHeightsMaterial.SetFloat("_L", _gridPixelSize);
+        _updateHeightsMaterial.SetFloat("_L", _pipeLength);
         _updateHeightsMaterial.SetFloat("_SandBlurPerSecond", _sandBlurPerSecond);
 
         // Do the step
@@ -204,7 +204,7 @@ public class Simulation : MonoBehaviour
         _updateVelocityFieldMaterial.SetTexture("_OutflowFluxRLBT", _outflowFluxRLBT.Texture);
         _updateVelocityFieldMaterial.SetTexture("_WaterSandRockSedimentTex", _waterSandRockSediment.Texture);
         _updateVelocityFieldMaterial.SetTexture("_PreviousWaterSandRockSedimentTex", _waterSandRockSediment.Buffer);
-        _updateVelocityFieldMaterial.SetFloat("_L", _gridPixelSize);
+        _updateVelocityFieldMaterial.SetFloat("_L", _pipeLength);
 
         // Do the step
         Graphics.Blit(_velocityXY.Texture, _velocityXY.Buffer, _updateVelocityFieldMaterial);
@@ -219,7 +219,7 @@ public class Simulation : MonoBehaviour
         _updateErosionDepositionMaterial.SetTexture("_VelocityXY", _velocityXY.Texture);
 
         _updateErosionDepositionMaterial.SetFloat("_DT", _updateInterval);
-        _updateErosionDepositionMaterial.SetFloat("_L", _gridPixelSize);
+        _updateErosionDepositionMaterial.SetFloat("_L", _pipeLength);
 
         _updateErosionDepositionMaterial.SetFloat("_Kc", _sedimentCapacityConstant);
         _updateErosionDepositionMaterial.SetFloat("_Ks", _dissolvingConstant);
@@ -237,7 +237,7 @@ public class Simulation : MonoBehaviour
     {
         _updateSedimentTransportationMaterial.SetTexture("_VelocityXY", _velocityXY.Texture);
         _updateSedimentTransportationMaterial.SetFloat("_DT", _updateInterval);
-        _updateSedimentTransportationMaterial.SetFloat("_L", _gridPixelSize);
+        _updateSedimentTransportationMaterial.SetFloat("_L", _pipeLength);
 
         // Do the step
         Graphics.Blit(_waterSandRockSediment.Texture, _waterSandRockSediment.Buffer, _updateSedimentTransportationMaterial);
@@ -270,7 +270,7 @@ public class Simulation : MonoBehaviour
 
         Texture tex = Texture2D.whiteTexture;
 
-        amount /= GridPixelSize * GridPixelSize;
+        amount /= PipeLength * PipeLength;
         amount = Vector4.Scale(amount, new Vector4(1f / 8f, 1f / 8f, 1f / 8f, 1f / 8f));
         _addSourceMaterial.SetVector("_Scale", amount);
 
