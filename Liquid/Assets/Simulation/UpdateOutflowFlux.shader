@@ -11,7 +11,6 @@
 		_G("Gravity Constant", Float) = 9.81
 
 		_Damping("Damping level per tick, 1 means no damping, 0 everything", Float) = 0.99
-		_FluxDeltaLimit("Limit how much flux can change per step", Float) = 0.1
 	}
 	SubShader
 	{
@@ -36,7 +35,6 @@
 			float _G;
 
 			float _Damping;
-			float _FluxDeltaLimit;
 
 			float4 frag(v2f_img i) : SV_Target
 			{
@@ -62,12 +60,7 @@
 				float4 dh = totalHeight4 - totalH_RLBT;
 
 				// Formula 2
-				float4 fluxDelta = _DT * _A * _G * dh / _L;
-				//fluxDelta = clamp(fluxDelta, -_FluxDeltaLimit, _FluxDeltaLimit);
-				//fluxDelta = _FluxDeltaLimit * fluxDelta / (1 + abs(fluxDelta)); // Smooth clamping function
-				fluxDelta = _FluxDeltaLimit * tanh(fluxDelta / _FluxDeltaLimit); // Smooth clamping function
-				//fluxDelta = _FluxDeltaLimit * fluxDelta / sqrt(1 + fluxDelta * fluxDelta); // Smooth clamping function
-				float4 fn = max(0, flux + fluxDelta) * _Damping; // fn = flux next;
+				float4 fn = max(0, flux + _DT * _A * _G * dh / _L) * _Damping; // fn = flux next;
 
 				// Formula 4
 				float K = clamp((heights.r * _L * _L) / ((fn.r + fn.g + fn.b + fn.a) * _DT), 0, 1);
