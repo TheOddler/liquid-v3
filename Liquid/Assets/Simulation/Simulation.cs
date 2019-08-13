@@ -264,15 +264,14 @@ public class Simulation : MonoBehaviour
         var tmpActiveRT = RenderTexture.active;
         RenderTexture.active = CurrentWaterSandRockSediment;
 
-        var brushSize = new Vector2(radius * 2, radius * 2);
+        float size = radius * 2 * GridPixelCount / transform.lossyScale.x;
         mid *= GridPixelCount;
-        mid -= brushSize / 2;
-        Rect screenRect = new Rect(mid, brushSize);
+        mid -= new Vector2(size / 2, size / 2);
+        Rect screenRect = new Rect(mid, new Vector2(size, size));
 
-        Texture tex = Texture2D.whiteTexture;
+        Texture tex = Texture2D.whiteTexture; // 4 by 4 texture
 
-        amount /= PipeLength * PipeLength;
-        amount = Vector4.Scale(amount, new Vector4(1f / 8f, 1f / 8f, 1f / 8f, 1f / 8f));
+        amount /= size * size; // divide amount evenly over the area
         _addSourceMaterial.SetVector("_Scale", amount);
 
         GL.PushMatrix();

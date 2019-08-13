@@ -34,17 +34,20 @@ public class DebugValueChecker : MonoBehaviour
         // LogCacheMaxMinAvg("Rock", 2);
         // LogCacheMaxMinAvg("Sediment", 3);
 
-        UpdateCache(_simulation.CurrentOutflowFluxRLBT);
-        LogCacheCenter("Flux R", 0);
-        LogCacheCenter("Flux L", 1);
-        LogCacheCenter("Flux B", 2);
-        LogCacheCenter("Flux T", 3);
+        // UpdateCache(_simulation.CurrentOutflowFluxRLBT);
+        // LogCacheCenter("Flux R", 0);
+        // LogCacheCenter("Flux L", 1);
+        // LogCacheCenter("Flux B", 2);
+        // LogCacheCenter("Flux T", 3);
+
+        // UpdateCache(_simulation.CurrentWaterSandRockSediment);
+        // LogCacheCenter("Water", 0);
+        // LogCacheCenter("Sand", 1);
+        // LogCacheCenter("Rock", 2);
+        // LogCacheCenter("Sediment", 3);
 
         UpdateCache(_simulation.CurrentWaterSandRockSediment);
-        LogCacheCenter("Water", 0);
-        LogCacheCenter("Sand", 1);
-        LogCacheCenter("Rock", 2);
-        LogCacheCenter("Sediment", 3);
+        LogCacheTotal("Water", 0);
     }
 
     private void UpdateCache(RenderTexture renderTexture)
@@ -133,5 +136,20 @@ public class DebugValueChecker : MonoBehaviour
         float height = _floatsCache[i + offset];
 
         Debug.Log(name + " - Val: " + height);
+    }
+
+    void LogCacheTotal(string name, int offset)
+    {
+        float total = 0;
+        for (int y = 0; y < _textureCache.height; ++y)
+        {
+            for (int x = 0; x < _textureCache.width; ++x)
+            {
+                int i = (y * _textureCache.width + x) * 4;
+                float height = _floatsCache[i + offset];
+                total += height;
+            }
+        }
+        Debug.Log(name + " - Total: " + total);
     }
 }
