@@ -8,6 +8,11 @@ public class VisualizationUpdater : MonoBehaviour
 
     Material _material;
 
+    Texture _originalWaterSandRockSediment;
+    Texture _originalVelocity;
+
+    Material _originalMaterialCopy;
+
     void Start()
     {
         // Simulation
@@ -15,13 +20,18 @@ public class VisualizationUpdater : MonoBehaviour
 
         // Material
         var firstRenderer = GetComponentInChildren<Renderer>();
-        _material = new Material(firstRenderer.sharedMaterial);
-
-        foreach (var rend in GetComponentsInChildren<Renderer>())
-        {
-            rend.sharedMaterial = _material;
-        }
+        _material = firstRenderer.sharedMaterial;
+#if UNITY_EDITOR
+        _originalMaterialCopy = new Material(_material);
+#endif
     }
+
+#if UNITY_EDITOR
+    void OnDestroy()
+    {
+        _material.CopyPropertiesFromMaterial(_originalMaterialCopy);
+    }
+#endif
 
     void Update()
     {

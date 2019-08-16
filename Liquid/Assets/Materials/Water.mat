@@ -27,6 +27,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: f296a4fbd45475e44836264bba7fac59, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - Texture2D_C31A53D7:
+        m_Texture: {fileID: 2800000, guid: fb2820bd913aaea468ba87a7b5f72abd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_D9DCCE94:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -80,12 +84,16 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _WaterSandRockSediment:
-        m_Texture: {fileID: 2800000, guid: c6723dde219acea4ba7d5db2c89e5bcc, type: 3}
+        m_Texture: {fileID: 2800000, guid: a91c964bfc2d35e4cac693cad2da0cbd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_37077D65: 0.05
+    - Vector1_7500F0D7: 3
+    - Vector1_8385E530: 1.5
     - Vector1_AAE9A17E: 50
+    - Vector1_B764012: -0.5
+    - Vector1_C9F39480: 0.6
     - Vector1_DC5CD80E: 5
     - Vector1_E4BE725C: 10.06
     - Vector1_FF7A4479: 0.1
@@ -110,6 +118,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_1EFAD718: {r: 0.23495908, g: 0.66664416, b: 0.9056604, a: 1}
+    - Color_C26A8871: {r: 0.19428623, g: 0.4501427, b: 0.6981132, a: 1}
+    - Vector2_9CD94BE9: {r: 0.2, g: 0.1, b: 0, a: 0}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
